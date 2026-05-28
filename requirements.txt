@@ -1,0 +1,4 @@
+﻿requests>=2.31.0
+lastfm-api>=0.2.0
+listenbrainz-api>=0.3.0
+pywin32>=306

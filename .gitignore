@@ -1,0 +1,8 @@
+﻿debug_log.txt
+*.log
+scrobble_cache.db
+__pycache__/
+.env
+.vscode/
+.idea/
+lotus.exe
