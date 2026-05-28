@@ -3,7 +3,7 @@
 # CORE AUTHOR: Kahlua Dingo
 # SYSTEM ARCHITECT & tester: Kahlua Dingo
 # INITIAL RELEASE: May 2026
-# BUILD VERSION: 1.0.0
+# BUILD VERSION: 1.0.1 - background.png -> MPCLotus.png; masked API field.
 # ==============================================================================
 
 import os
@@ -52,7 +52,7 @@ os.makedirs(ASSETS_FOLDER, exist_ok=True)
 CONFIG_FILE = os.path.join(ROOT_FOLDER, "mpcscrobbler_config.ini")
 DB_FILE = os.path.join(ROOT_FOLDER, "scrobble_cache.db")
 ICON_FILE = os.path.join(ROOT_FOLDER, "icon.ico")
-SKIN_FILE = os.path.join(ASSETS_FOLDER, "background.png")
+SKIN_FILE = os.path.join(ASSETS_FOLDER, "MPCLotus.png")
 
 def get_log_path():
     return os.path.join(ROOT_FOLDER, "debug_log.txt")
@@ -93,7 +93,7 @@ def extract_bundled_file(filename, target_path, sub_dir=""):
             write_debug_log(f"FILE_EXTRACTION_ERROR_{filename}", e)
 
 extract_bundled_file("icon.ico", ICON_FILE)
-extract_bundled_file("background.png", SKIN_FILE, "assets")
+extract_bundled_file("MPCLotus.png", SKIN_FILE, "assets")
 
 DARK_TITLE_COLOR = "#0A0A0A"
 
@@ -204,7 +204,7 @@ class LotusApp:
             if os.path.exists(explicit_path):
                 bg_path = explicit_path
             else:
-                self.current_bg_name = "background.png"
+                self.current_bg_name = "MPCLotus.png"
         
         if os.path.exists(bg_path) and os.path.getsize(bg_path) > 0:
             try:
@@ -307,7 +307,7 @@ class LotusApp:
             self.canvas.pack(fill=tk.BOTH, expand=True)
             self.bg_image_id = self.canvas.create_image(0, 0, anchor=tk.NW)
             
-            self.ent_key = tk.Entry(self.canvas, width=32, font=self.font_main, bg=self.entry_bg, fg=self.text_color, insertbackground=self.text_color, bd=1, relief=tk.SOLID)
+            self.ent_key = tk.Entry(self.canvas, width=32, font=self.font_main, bg=self.entry_bg, fg=self.text_color, insertbackground=self.text_color, bd=1, relief=tk.SOLID, show="*")
             self.ent_secret = tk.Entry(self.canvas, width=32, font=self.font_main, bg=self.entry_bg, fg=self.text_color, insertbackground=self.text_color, bd=1, relief=tk.SOLID, show="*")
             self.ent_sk = tk.Entry(self.canvas, width=32, font=self.font_main, bg=self.entry_bg, fg=self.text_color, insertbackground=self.text_color, bd=1, relief=tk.SOLID, show="*")
             self.ent_lb = tk.Entry(self.canvas, width=32, font=self.font_main, bg=self.entry_bg, fg=self.text_color, insertbackground=self.text_color, bd=1, relief=tk.SOLID, show="*")
@@ -361,7 +361,8 @@ class LotusApp:
             fields = [("API KEY:", "ent_key"), ("SHARED SECRET:", "ent_secret"), ("SESSION KEY (sk):", "ent_sk"), ("LISTENBRAINZ TOK:", "ent_lb"), ("MPC-HC PORT:", "ent_port")]
             for idx, (lbl_txt, attr) in enumerate(fields):
                 tk.Label(self.main_frame, text=lbl_txt, font=self.font_main, bg=self.bg_color, fg=self.text_color, anchor="w").grid(row=idx, column=0, sticky=tk.W, pady=3)
-                entry = tk.Entry(self.main_frame, width=32, font=self.font_main, bg=self.entry_bg, fg=self.text_color, insertbackground=self.text_color, bd=1, relief=tk.SOLID, show="*" if "secret" in attr or "sk" in attr or "lb" in attr else None)
+                show_char = "*" if attr != "ent_port" else None
+                entry = tk.Entry(self.main_frame, width=32, font=self.font_main, bg=self.entry_bg, fg=self.text_color, insertbackground=self.text_color, bd=1, relief=tk.SOLID, show=show_char)
                 entry.grid(row=idx, column=1, pady=3, padx=10)
                 setattr(self, attr, entry)
             
@@ -706,7 +707,7 @@ class LotusApp:
     def generate_signature(self, params, secret):
         sorted_keys = sorted(params.keys())
         sig_string = "".join(f"{k}{params[k]}" for k in sorted_keys) + secret
-        return hashlib.md5(sig_string.encode('utf-8'), usedforsecurity=False).hexdigest()
+        return hashlib.md5(sig_string.encode('utf-8')).hexdigest()
 
     def start_authorization(self):
         api_key = self.config["LastFM"].get("api_key", "").strip()
