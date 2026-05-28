@@ -706,7 +706,7 @@ class LotusApp:
     def generate_signature(self, params, secret):
         sorted_keys = sorted(params.keys())
         sig_string = "".join(f"{k}{params[k]}" for k in sorted_keys) + secret
-        return hashlib.md5(sig_string.encode('utf-8')).hexdigest()
+        return hashlib.md5(sig_string.encode('utf-8'), usedforsecurity=False).hexdigest()
 
     def start_authorization(self):
         api_key = self.config["LastFM"].get("api_key", "").strip()
