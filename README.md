@@ -25,10 +25,10 @@ Operates as a transparent background process with zero registry footprint, no st
 Lotus is engineered for maximum security through strict isolation and local-only processing.
 
 Local-Only Interception
-All communication with your local media player is strictly restricted to the 127.0.0.1 loopback interface. No external network traffic ever touches your media player’s internal interface.
+All communication with your local media player is strictly restricted to the 127.0.0.1 loopback interface. No external network traffic ever touches your media player's internal interface.
 
 Zero-Exposed Ports
-The application does not broadcast to your local network. It binds exclusively to the loopback address, ensuring no malicious scripts or local-network actors can hijack your session or poll your playback status.
+The application does not broadcast to your local network. It binds exclusively to the loopback address; no malicious scripts or local-network actors can hijack your session or poll your playback status.
 
 Encrypted Transmission
 Every payload sent to external APIs (Last.fm and ListenBrainz) is processed via TLS/HTTPS. Your API tokens and session keys remain encrypted in transit.
@@ -39,21 +39,22 @@ Lotus is fully portable. It does not write to the Windows Registry, install back
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ◈ QUICK SETUP
-1. MPC-HC Configuration
+
+MPC-HC Configuration
 
 Open MPC-HC -> View -> Options -> Player -> Web Interface.
 
 Enable "Listen on port 13579" and check "Allow access from localhost only".
 
-2. Authentication
+Authentication
 
-Run Lotus.exe.
+Run `lotus.exe`.
 
 Input your API credentials. Use the provided UI tools to link your accounts securely via browser handshake.
 
 Click [ COMM_SAVE ] to store your configuration locally.
 
-3. Operation
+Operation
 
 The background monitor starts immediately. It will detect your media playback automatically.
 
@@ -63,11 +64,40 @@ If you switch to a browser or other media player, Lotus seamlessly pivots to OS-
 
 ◈ SECURITY VERIFICATION
 To verify the integrity of the downloaded Lotus.exe, run the following in PowerShell:
-
-Get-FileHash -Path "Lotus.exe" -Algorithm SHA256
-
+```bash
+Get-FileHash -Path "lotus.exe" -Algorithm SHA256
+```
 The result must match:
-D12CB23730319C2208B35E9266CEABA7064D1503806F7F202DFBDEE0CADD270B
+E04B183A6F4E8B49648C3F75521E17A1496733FA111B45CB9A5DBC616F3E3ACD        lotus.exe
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+◈ COMPILATION FROM SOURCE
+Building `lotus.exe` locally requires an exact file structure. If the source file, icon, or assets are missing from the root, the compilation will fail.
+
+Prerequisites
+Ensure you have the required dependencies installed:
+```bash
+pip install pyinstaller
+pip install -r requirements.txt
+```
+
+Required Directory Structure
+You must have `lotus.py`, `icon.ico`, and the `assets`/ folder in the same root directory before running the build command. Your structure must look like this:
+
+[Root Directory]/
+├── lotus.py
+├── icon.ico
+├── requirements.txt
+└── assets/
+└── MPCLotus.png
+
+Build Command
+Open your terminal in the root directory and execute:
+```bash
+pyinstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." --add-data "assets/MPCLotus.png;assets" lotus.py
+```
+The resulting Lotus.exe will be generated inside the newly created /dist folder.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -90,7 +120,7 @@ Auto-Update Mechanism: Implementation of a silent check-for-updates service.
 Extended Player Support: Direct API integration for additional local media players.
 
 Why Lotus?
-Lotus was developed to provide a reliable, aesthetically pleasing scrobbling solution for Media Player Classic, specifically optimized for high-resolution displays like homelab television setups. Rather than functioning as a standard administrative tool, Lotus enhances your media consumption by automating the social metadata casting process. It transforms a passive listening session into a curated data feed, ensuring your playback history is captured with precision while you focus entirely on the enjoyment of your media.
+Lotus was developed to provide a reliable, aesthetically pleasing scrobbling solution for Media Player Classic, specifically optimized for high-resolution displays like homelab television setups. Rather than functioning as a standard administrative tool, Lotus enhances your media consumption by automating the social metadata casting process. Your playback history is captured with precision while you focus entirely on the enjoyment of your media.
 
 Platform Compatibility & Security Expectations
 Lotus is currently built specifically for the Windows environment, leveraging native Windows APIs for universal media tracking. I made an attempt to have the Windows version as secure as possible before V1 hit GitHub. If you plan to release Linux and Apple versions, I ask that you please keep code contributions security-forward. Porting to Linux or macOS requires replacing the Windows-specific System Media Transport Controls (SMTC) module with platform-native alternatives (e.g., MPRIS for Linux). If you are a developer interested in contributing a security-focused tracking module for these platforms, pull requests are welcome.
@@ -98,7 +128,13 @@ Lotus is currently built specifically for the Windows environment, leveraging na
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ◈ REQUIREMENTS & DISCLAIMER
-Requirements: Python 3.11+ | pip install -r requirements.txt
+Requirements: Python 3.11+
+Your requirements.txt must contain the following dependencies:
+
+`requests>=2.31.0
+lastfm-api>=0.2.0
+listenbrainz-api>=0.3.0
+pywin32>=306`
 
 Disclaimer: Background assets are fan-created artwork and belong to their respective copyright holders. This software is provided for personal, non-commercial use. Any skinning or theming is fully up to the end-user; I am not responsible for the skins and themes used by end-users.
 
@@ -113,37 +149,36 @@ Donations are appreciated but never required. They go directly towards developme
 
 https://ko-fi.com/k4hlu4
 
-I'll also accept cryptocurrency donations, but send an e-mail regarding that.
-
+If you have alternative donations other than fiat currency, feel free to send an email beforehand.
 <pre>
                   ░█▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                     ▓░   
                       ▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                    ▒▒   
                     ▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                   ░▓   
                    █▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                    ▓   
                     ▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒░                   ▓   
-░                     ▓▓▒▒▒▒▒▒▒▒▒▒▒▒░    ▒▒▒▒▒           ░▒      ▓░  
-░                      ▒▓▒▒▒▒▒▒▒▒▒▒░░     ░▒▒▒           ▒  ░    ▓▓░░
-              ▒▒▒▒░     ▒█▒▒▒▒▒▒▒▒▒░░       ▒▒           ▓   ░   ░ ▓ 
-          ▒▓▒▒▒▒▒▒▓      ▓█▒▒▒▒▒▒▒░  ░       ░           ▓    ▒ ░   ▒
-       ▒▓▒▒▒▒▒▒▒▒▒▓▒      ▓▓▒▒▒▒▒▒   ▒                  ▒█▓░   ▒▓    
-     ░▓▒▒▒▓▓▓▓▓▓▓▓▓▓       █▓▒▒▒▒░   ▒                  █▓▒▓▓   ░    
-    ▒▒▓▓▓▓▒░░     ░░       ▒▓▒▒▒░   ░▓                 ▓▓▓▓▓▓▓▒      
-   ▓▓▒░                     ▓▓▒▒░   ▒▓▒               ▓▒    ░▓▓▓     
-  ░                         ▓▓▒▒   ▒▒██░             ▓▒         ░    
-                            ▓▓▒░  ▒▒▓█▒▒            ▓▒               
-       ░░░                  ▒▓▒ ░▒▒▒▓░ ▒          ▒▓░   ░░░          
-   ▒██████████▓░            ░▓░▒▒▒▒▓▓  ▒        ░▓▒░▓█████████▓░     
- ▒█████▓▓████████▒          ▒▓▒▒▒▒▓▓   ▒      ░▓▓▓███████▓▓▓█████▒   
-██▓  ▒     ▓███████▒        ▒▓▒▒▒▓▓    ░    ▒▓▒▓███████▒     ▒  ▓██░ 
-▓    ░    ░▓█▓▓▓▒  ░▓       ▒▓▒▓█▒    ▒   ▒░ ░████▓▓         ▒    ▓█▓
+░                     ▓▓▒▒▒▒▒▒▒▒▒▒▒▒░    ▒▒▒▒▒            ░▒      ▓░  
+░                      ▒▓▒▒▒▒▒▒▒▒▒▒░░     ░▒▒▒            ▒  ░    ▓▓░░
+              ▒▒▒▒░     ▒█▒▒▒▒▒▒▒▒▒░░       ▒▒            ▓   ░   ░ ▓ 
+          ▒▓▒▒▒▒▒▒▓      ▓█▒▒▒▒▒▒▒░  ░       ░            ▓    ▒ ░   ▒
+       ▒▓▒▒▒▒▒▒▒▒▒▓▒      ▓▓▒▒▒▒▒▒   ▒                    ▒█▓░   ▒▓   
+     ░▓▒▒▒▓▓▓▓▓▓▓▓▓▓       █▓▒▒▒▒░   ▒                  █▓▒▓▓   ░   
+    ▒▒▓▓▓▓▒░░     ░░       ▒▓▒▒▒░   ░▓                  ▓▓▓▓▓▓▓▒     
+   ▓▓▒░                    ▓▓▒▒░   ▒▓▒                ▓▒    ░▓▓▓     
+  ░                        ▓▓▒▒   ▒▒██░              ▓▒         ░   
+                           ▓▓▒░  ▒▒▓█▒▒             ▓▒               
+       ░░░                 ▒▓▒ ░▒▒▒▓░ ▒          ▒▓░   ░░░         
+   ▒██████████▓░           ░▓░▒▒▒▒▓▓  ▒        ░▓▒░▓█████████▓░     
+ ▒█████▓▓████████▒         ▒▓▒▒▒▒▓▓   ▒      ░▓▓▓███████▓▓▓█████▒   
+██▓  ▒     ▓███████▒       ▒▓▒▒▒▓▓    ░    ▒▓▒▓███████▒     ▒  ▓██░ 
+▓    ░    ░▓█▓▓▓▒  ░▓      ▒▓▒▓█▒    ▒   ▒░ ░████▓▓         ▒    ▓█▓
      ░    ░██▓▒      ▓      ▓▓▓█      ▓░▒   ▒▓██▓▓░          ▒     ██
-           ██▓▒     █░      ▓▓       ░░      ▒█▓▓▓░    ▒     ▒     ▓ 
-▓    ░     ░   ▓▓▓▓▓█▒                       ▓▓   ░▓▓▓█▒     ▒    ▒  
- ░   ░     ░▒░▓▓▓▓▓▓█▓                       ██▓▓▓▓▓▓█▓      ▒       
-     ▒      ▒█▓▓▓▓▓▓██                      ░██▓▓▓▓▓▓█░              
-      ▒      ░█▓▓▓▓█▓▒                      ▒▒▓█▓▓▓▓▓       ░        
-       ░        ▒▒▒                         ▒   ▒▒▒        ░         
-      ░█░                                                 ▒▓         
+           ██▓▒      █░      ▓▓       ░░     ▒█▓▓▓░    ▒      ▒     ▓ 
+▓    ░     ░   ▓▓▓▓▓█▒               ▓▓   ░▓▓▓█▒     ▒    ▒  
+ ░   ░     ░▒░▓▓▓▓▓▓█▓               ██▓▓▓▓▓▓█▓      ▒       
+     ▒      ▒█▓▓▓▓▓▓██               ░██▓▓▓▓▓▓█░             
+      ▒      ░█▓▓▓▓█▓▒               ▒▒▓█▓▓▓▓▓       ░       
+       ░        ▒▒▒                 ▒   ▒▒▒        ░         
+      ░█░                                              ▒▓         
          ░▒░       ░░                         ░░      ░▒▒            
                                                                      
                                                                      
@@ -152,5 +187,5 @@ I'll also accept cryptocurrency donations, but send an e-mail regarding that.
                      ▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓░                       
                       ▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓                        
    ██▓                ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒               ░██▓     
-    ▒██                ▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒                ██▒      
-</pre>
+    ▒██                ▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒                ██▒     
+</pre> 
