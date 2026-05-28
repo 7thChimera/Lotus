@@ -2,7 +2,7 @@
 
 A high-precision, lightweight, standalone utility for casting media playback metadata to Last.fm and ListenBrainz. Built for power users who demand reliability, security, and zero bloat. Includes a HD-skinnable GUI with a matrix visualizer and live track marquee.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## Core Features
 
@@ -38,13 +38,15 @@ Lotus is engineered for maximum security through strict isolation and local-only
 
 ## Security Verification
 
-To verify the integrity of the downloaded `lotus.exe`, run the following in PowerShell:
+To verify the integrity of the downloaded `Lotus.7z`, run the following in PowerShell:
 ```bash
-Get-FileHash -Path "Lotus.exe" -Algorithm SHA256
+Get-FileHash -Path "Lotus.7z" -Algorithm SHA256
 ```
 
 The result must match:
-`E04B183A6F4E8B49648C3F75521E17A1496733FA111B45CB9A5DBC616F3E3ACD`
+`B620569AB1D3DAE6F8CBC18E291C9EB1EF17AC67AE869369700C5FC399D853D7` for `Lotus.7z`
+Check the .exe as well:
+`E04B183A6F4E8B49648C3F75521E17A1496733FA111B45CB9A5DBC616F3E3ACD` for `lotus.exe`
 
 ## Compilation From Source
 
