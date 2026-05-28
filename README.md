@@ -107,7 +107,7 @@ Lotus is currently built specifically for the Windows environment, leveraging na
 * **Donations:** https://ko-fi.com/k4hlu4
 * **Alternative Donations:** If you have alternative donations other than fiat currency, feel free to send an email beforehand.
 ```text
-░█▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                     ▓░   
+                ░█▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                     ▓░   
                       ▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                    ▒▒   
                     ▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                   ░▓   
                    █▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒                    ▓   
