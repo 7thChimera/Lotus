@@ -1,8 +1,24 @@
-﻿debug_log.txt
-*.log
+# Runtime Configuration and Logs
+mpcscrobbler_config.ini
 scrobble_cache.db
+debug_log.txt
+*.log
+
+# Build Artifacts
+build/
+dist/
+*.spec
+lotus.exe
+*.exe
+
+# Python Caches and Environments
 __pycache__/
+*.py[cod]
+*$py.class
 .env
+venv/
+.venv/
+
+# IDE Directories
 .vscode/
 .idea/
-lotus.exe
