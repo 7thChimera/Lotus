@@ -1,3 +1,5 @@
+<img width="800" height="544" alt="LotusDemo" src="https://github.com/user-attachments/assets/b80524c4-5f5d-44b8-99ab-6a8c7c184ed0" />
+
 # Lotus // Universal Media Telemetry Core
 
 A high-precision, lightweight, standalone utility for casting media playback metadata to Last.fm, ListenBrainz, and Trakt. Built for power users who demand reliability, security, and zero bloat. Includes an HD-skinnable GUI with a matrix visualizer, live track marquee, and unobtrusive system tray integration.
@@ -108,7 +110,7 @@ Lotus is currently built specifically for the Windows environment, leveraging na
 ## Requirements & Disclaimer
 
 * **Requirements:** Python 3.11+
-* **Disclaimer:** Background assets are fan-created artwork and belong to their respective copyright holders. This software is provided for personal, non-commercial use. Any skinning or theming is fully up to the end-user; Kahlua is not responsible for the skins and themes used by end-users.
+* **Disclaimer:** Background assets are fan-created artwork and belong to their respective copyright holders. This software is provided for personal, non-commercial use. Any skinning or theming is fully up to the end-user; Kahlua is not responsible for the skins and themes used by end-users, futhermore the only skin provided is the one that fits the matrix rain theme, you'll have to drop your own skins in.
 
 ## Support & Contact
 
