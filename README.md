@@ -80,7 +80,7 @@ Lotus_1.1.0_Source/
 
 Open your terminal in the root directory and execute:
 ```bash
-pyinstaller --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." --add-data "assets;assets" lotus.py
+pyinstaller --clean --noconsole --onefile --icon=icon.ico --add-data "icon.ico;." --add-data "assets;assets" lotus.py
 ```
 
 The resulting `lotus.exe` will be generated inside the newly created `/dist` folder.
@@ -111,7 +111,7 @@ Lotus is currently built specifically for the Windows environment, leveraging na
 
 ## Requirements & Disclaimer
 
-* **Requirements:** Python 3.11+
+* **Requirements:** Python 3.11+ only if compiling from source.
 * **Disclaimer:** Background assets are fan-created artwork and belong to their respective copyright holders. This software is provided for personal, non-commercial use. Any skinning or theming is fully up to the end-user; Kahlua is not responsible for the skins and themes used by end-users, futhermore the only skin provided is the one that fits the matrix rain theme, you'll have to drop your own skins in.
 
 ## Support & Contact
