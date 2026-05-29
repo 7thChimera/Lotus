@@ -41,12 +41,14 @@ Lotus is engineered for maximum security through strict isolation, local-only pr
 
 ## Security Verification
 
-To verify the integrity of the `lotus.exe` extracted from a fresh Release, open a Powershell terminal from within the Lotus root folder and run the following:
+To verify the integrity of the `Lotus.7z` of a downloaded Release, open a Powershell terminal in the same directory that it saved to and then run the first line below of the following code:
 ```bash
+Get-FileHash -Path "Lotus.7z" -Algorithm SHA256
 Get-FileHash -Path "lotus.exe" -Algorithm SHA256
 ```
 
-The result must match:
+Verify the .exe in the extracted Lotus folder through the Powershell terminal with the second line above:
+`1E7EC6034BF183312A4C6D67D64A28D38B9B295444DF8D7EBDBA3F7025517B24`
 `89029E2F288E2C9B8AFBC4DE459A92731C097B7CED3553ECC225838AA25D45F8`
 
 ## Compilation From Source
