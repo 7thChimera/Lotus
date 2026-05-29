@@ -98,6 +98,8 @@ The resulting `lotus.exe` will be generated inside the newly created `/dist` fol
 * **Auto-Update Mechanism:** Implementation of a silent check-for-updates service.
 * **Extended Player Support:** Direct API integration for additional local media players.
 
+<img width="800" height="475" alt="LotusDemo2" src="https://github.com/user-attachments/assets/6c7e486d-445d-4355-9462-a2fc9b5ac335" />
+
 ### Why Lotus?
 Lotus was developed to provide a reliable, aesthetically pleasing telemetry solution for Media Player Classic, specifically optimized for high-resolution displays like homelab television setups. It transforms a passive listening or viewing session into a curated data feed, ensuring your playback history is captured with precision while you focus entirely on the enjoyment of your media.
 
