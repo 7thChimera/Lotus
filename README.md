@@ -2,7 +2,11 @@
 
 # Lotus // Universal Media Telemetry Core
 
-A high-precision, lightweight, standalone utility for casting media playback metadata to Last.fm, ListenBrainz, and Trakt. Built for power users who demand reliability, security, and zero bloat. Includes an HD-skinnable GUI with a matrix visualizer, live track marquee, and unobtrusive system tray integration.
+A high-precision, lightweight, standalone utility for casting media playback metadata to Last.fm, ListenBrainz, and Trakt. Built for power users who demand reliability, security, and zero bloat. Includes an HD-skinnable GUI with a matrix visualizer, live track marquee, and unobtrusive system tray integration. 
+
+Built in Tkinter, so it will tax your CPU if you turn a few thousand lines of Matrix rain on all at once by typing 'Matrix density [n]', but this prototype also allows you to run completely graphicless and lightweight with the typing of two simple terminal commands 'lamp off' and 'simple'. It is essentially a wrapper for Tcl/Tk, and while it is remarkably robust for standard event-driven GUIs, it hits a wall when you force it into high-frequency, continuous rendering tasks—especially with visualizers.
+
+For the future and once all features are prototyped and complete in this Python version, we will build into Rust EGUI, which relys on GPU rather than CPU.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
