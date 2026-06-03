@@ -17,9 +17,9 @@ A high-precision, lightweight, standalone utility for casting media playback met
 
 ## Security & Privacy Architecture
 
-Lotus is engineered for maximum security through strict isolation, local-only processing, and credential obfuscation.
+Lotus is engineered for security through strict isolation, local-only processing, and credential obfuscation.
 
-* **Local Configuration Obfuscation:** API keys and session tokens are obfuscated in the local mpcscrobbler_config.ini file using a specialized cipher to prevent casual exposure and credential scraping.
+* **Local Configuration Obfuscation in V1:** API keys and session tokens are obfuscated in the local mpcscrobbler_config.ini file using a cipher to prevent casual exposure and credential scraping, but it does not protect against local threat actors. (Just be careful!)
 * **Local-Only Interception:** All communication with your local media player is strictly restricted to the 127.0.0.1 loopback interface. No external network traffic ever touches your media player's internal interface.
 * **Zero-Exposed Ports:** The application does not broadcast to your local network. It binds exclusively to the loopback address; no malicious scripts or local-network actors can hijack your session or poll your playback status.
 * **Encrypted Transmission:** Every payload sent to external APIs is processed via TLS/HTTPS. Your encrypted tokens remain secure in transit.
@@ -94,9 +94,14 @@ The resulting `lotus.exe` will be generated inside the newly created `/dist` fol
 ## Roadmap & Platform Compatibility
 
 ### Roadmap
-* **Multi-Format Caching:** Expand SQL storage to handle high-volume offline session logging.
-* **Auto-Update Mechanism:** Implementation of a silent check-for-updates service.
-* **Extended Player Support:** Direct API integration for additional local media players.
+* **Security Hardening (Done, not pushed):** Officially deprecated the legacy XOR-based obfuscation used in the current release. The application now employs Fernet symmetric encryption for all JSON payloads and has migrated credential management from plaintext files to the Windows Credential Manager.
+* **Four-Core Modular Design (Done, not pushed):** The application has been rebuilt into four dedicated modules. API/telemetry, encrypted data handling, state observer, and rendering. This decoupling allows for individual component maintenance without risking pipeline instability.
+* **Auto-Update Mechanism: (Done, not pushed)** Implementation of a silent background service to ensure security patches and architectural fixes are delivered without user intervention.
+* **Homelab mode: (Done, not pushed)** An opt-in toggle allowing users to cache a ~1.5GB dataset of movies, series, anime, and music metadata. This enables high-speed, local-only resolution by downloading snapshots directly from TMDB, AniDB, and Discogs. This provides instant scrobbling and search performance, functioning entirely without external network dependencies.
+* **Multi-Format Caching: (Done, not pushed)** Expansion of local storage schemas to support high-volume offline session logging, preventing data loss during network interruptions.
+* **Atproto integration: (Done, not pushed)** Native api support for the Authenticated Transfer Protocol (AT Protocol), allowing users to broadcast playback events directly to Bluesky feeds and other federated services.
+* **Performance-First Core: (Building)** The telemetry and network dispatchers are being rewritten in Rust. This transition eliminates the performance limitations of the Python Global Interpreter Lock (GIL), enabling high-frequency polling with near-zero CPU overhead. This will be a distributed fork away from Python.
+* **Database Hardening: (Building)** The rust version will use SQLCipher. This layers AES-256 page-level encryption over our existing Fernet-encrypted data, ensuring total file-level security.
 
 <img width="800" height="475" alt="LotusDemo2" src="https://github.com/user-attachments/assets/6c7e486d-445d-4355-9462-a2fc9b5ac335" />
 
